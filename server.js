@@ -1,8 +1,27 @@
+const express = require("express");
+const app = express();
+
+
+// exercise 1 
+
+//const express = require("express");
+//const app = express(); // defined express here don't need to for the others 
+
+// Route to greet the user
+app.get("/greetings/:username", (req, res) => {
+    const username = req.params.username;
+    res.send(`Hello there, ${username}!`);
+});
+
+
+
+
+
 //exercise 2
 
-import express from "express";
+// import express from "express";
 
-const app = express();
+ //const app = express();
 
 app.get("/roll/:number", (req, res) => {
     const numParam = req.params.number;
@@ -11,7 +30,7 @@ app.get("/roll/:number", (req, res) => {
     }
     const maxNumber = Number(numParam);
     const randomResult = Math.floor(Math.random() * (maxNumber + 1));
-    res.send(`You rolled a ${randomResult}.`);
+    res.send(`You rolled a ${randomResult}.`); //back tick string interp
   });
   
   // Exercise 3 
@@ -24,7 +43,7 @@ app.get("/roll/:number", (req, res) => {
 
 app.get("/collectibles/:index", (req, res) => {
     
-    const index = parseInt(req.params.index); // this converts into a string because of Params idk why just does
+    const index = parseInt(req.params.index); // this converts into a string into a number because of ParsInt. idk why just does
 
     if (index < 0 || index >= collectibles.length || isNaN(index)) { 
         return res.send("This item is not yet in stock. Check back soon!");  // number checker
@@ -50,19 +69,19 @@ const shoes = [
     { name: "Fifty-Inch Heels", price: 175, type: "heel" }
 ];
 
-pp.get("/shoes", (req, res) => {
+app.get("/shoes", (req, res) => {
     let filteredShoes = [...shoes]; //...shoes prevents changes 
 
-    const minPrice = parseFloat(req.query["min-price"]); // Convert to number
-    const maxPrice = parseFloat(req.query["max-price"]); // Convert to number
+    const minPrice = parseFloat(req.query["min-price"]); // Convert to low number
+    const maxPrice = parseFloat(req.query["max-price"]); // Convert to high number
 
 const type = req.query.type; // this gets type as a string 
 
 if (!isNaN(minPrice)) {
-    filteredShoes = filteredShoes.filter(shoe => shoe.price >= minPrice);
+    filteredShoes = filteredShoes.filter(shoe => shoe.price >= minPrice); // call back function
 }
 if (!isNaN(maxPrice)) {
-    filteredShoes = filteredShoes.filter(shoe => shoe.price <= maxPrice);
+    filteredShoes = filteredShoes.filter(shoe => shoe.price <= maxPrice); //
 }
 if (type) {
     filteredShoes = filteredShoes.filter(shoe => shoe.type.toLowerCase() === type.toLowerCase());
